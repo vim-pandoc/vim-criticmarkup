@@ -4,14 +4,14 @@ function! criticmarkup#Init()
 endfunction
 
 function! criticmarkup#InjectHighlighting()
-    syn region criticAddition matchgroup=criticAdd start=/{++/ end=/++}/ concealends
-    syn region criticDeletion matchgroup=criticDel start=/{--/ end=/--}/ concealends
-    syn region criticSubstitutionDeletion start=/{\~\~/ end=/.\(\~>\)\@=/ keepend
-    syn region criticSubstitutionAddition start=/\~>/ end=/\~\~}/ keepend
+    syn region criticAddition matchgroup=criticAdd start=/{++/ end=/++}/ containedin=pandocDefinitionBlock concealends
+    syn region criticDeletion matchgroup=criticDel start=/{--/ end=/--}/ containedin=pandocDefinitionBlock concealends
+    syn region criticSubstitutionDeletion start=/{\~\~/ end=/.\(\~>\)\@=/ containedin=pandocDefinitionBlock keepend
+    syn region criticSubstitutionAddition start=/\~>/ end=/\~\~}/ containedin=pandocDefinitionBlock keepend
     syn match criticSubstitutionDeletionMark /{\~\~/ contained containedin=criticSubstitutionDeletion conceal
     syn match criticSubstitutionAdditionMark /\~\~}/ contained containedin=criticSubstitutionAddition conceal
-    syn region criticComment matchgroup=criticMeta start=/{>>/ end=/<<}/ concealends
-    syn region criticHighlight matchgroup=criticHighlighter start=/{==/ end=/==}/ concealends
+    syn region criticComment matchgroup=criticMeta start=/{>>/ end=/<<}/ containedin=pandocDefinitionBlock concealends
+    syn region criticHighlight matchgroup=criticHighlighter start=/{==/ end=/==}/ containedin=pandocDefinitionBlock concealends
 
     hi criticAdd guibg=#00ff00 guifg=#101010
     hi criticDel guibg=#ff0000 guifg=#ffffff
