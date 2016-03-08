@@ -75,16 +75,24 @@ function! criticmarkup#Critic(args)
     endif
 endfunction
 
-function! criticmarkup#JumpNext()
-	exe "normal ".v:count1."/{[-+\\~]\{2}\<CR>"
+function! criticmarkup#JumpNext(editorial)
+	if a:editorial == 1
+		exe "normal ".v:count1."/{[-+\\~]\{2}\<CR>"
+	else
+		exe "normal ".v:count1."/{[-+\\~\>=]\{2}\<CR>"
+	endif
 endfunction
 
-function! criticmarkup#JumpPrevious()
-    exe "normal ".v:count1."?{[-+\\~]\{2}\<CR>"
+function! criticmarkup#JumpPrevious(editorial)
+	if a:editorial == 1
+		exe "normal ".v:count1."?{[-+\\~]\{2}\<CR>"
+	else
+		exe "normal ".v:count1."?{[-+\\~\>=]\{2}\<CR>"
+	endif
 endfunction
 
 function! criticmarkup#CriticNext()
-	call criticmarkup#JumpNext()
+	call criticmarkup#JumpNext(1)
     let op = input("What to do? ", "", "custom,criticmarkup#CriticCompleteFunc")
     if op =~ "accept"
         call criticmarkup#Accept()
@@ -101,5 +109,5 @@ function! criticmarkup#CriticCompleteFunc(a, c, p)
     endif
 endfunction
 
-nmap ]m :call criticmarkup#JumpNext()<CR>
-nmap [m :call criticmarkup#JumpPrevious()<CR>
+nmap ]m :call criticmarkup#JumpNext(0)<CR>
+nmap [m :call criticmarkup#JumpPrevious(0)<CR>
