@@ -111,3 +111,52 @@ endfunction
 
 nmap ]m :call criticmarkup#JumpNext(0)<CR>
 nmap [m :call criticmarkup#JumpPrevious(0)<CR>
+
+nnoremap <leader>ed :set operatorfunc=CMDelOperator<cr>g@
+vnoremap <leader>ed :<c-u>call CMOperator(visualmode(),'<','>','{--','--}')<cr>
+nnoremap <leader>ea :set operatorfunc=CMAddOperator<cr>g@
+vnoremap <leader>ea :<c-u>call CMOperator(visualmode(),'<','>','{++','++}')<cr>
+nnoremap <leader>eh :set operatorfunc=CMHilOperator<cr>g@
+vnoremap <leader>eh :<c-u>call CMOperator(visualmode(),'<','>','{==','==}')<cr>
+nnoremap <leader>ec :set operatorfunc=CMComOperator<cr>g@
+vnoremap <leader>ec :<c-u>call CMOperator(visualmode(),'<','>','{>>','<<}')<cr>
+nnoremap <leader>es :set operatorfunc=CMSubOperator<cr>g@
+vnoremap <leader>es :<c-u>call CMOperator(visualmode(),'<','>','{~~','~>~~}')<cr>
+
+function! CMDelOperator(type)
+    call CMOperator(a:type,'[',']','{--','--}')
+endfunction
+
+function! CMAddOperator(type)
+    call CMOperator(a:type,'[',']','{++','++}')
+endfunction
+
+function! CMHilOperator(type)
+    call CMOperator(a:type,'[',']','{==','==}')
+endfunction
+
+function! CMComOperator(type)
+    call CMOperator(a:type,'[',']','{>>','<<}')
+endfunction
+
+function! CMSubOperator(type)
+    call CMOperator(a:type,'[',']','{~~','~>~~}')
+endfunction
+
+function! CMOperator(type, m0, m1, t0, t1)
+    let pastem=&paste
+    set paste
+
+    if a:type ==# 'v' || a:type == 'char'
+        silent exe "normal! `" . a:m0 . "v`" . a:m1 . "d"
+        "silent exe "normal! i" . a:t0 . "\<esc>pa" . a:t1 . "\<esc>"
+        silent exe "normal! i" . a:t0 . "\<esc>a". a:t1 . "\<esc>g`[P"
+    elseif a:type ==# 'V' || a:type == 'line'
+        silent exe "normal! `" . a:m0 . "V`" . a:m1 . "d"
+        "silent exe "normal! O" . a:t0 . "\<esc>po" . a:t1 . "\<esc>"
+        silent exe "normal! O" . a:t0 . "\<cr>" . a:t1 . "\<esc>P"
+    endif
+
+    let &paste=pastem
+endfunction
+
