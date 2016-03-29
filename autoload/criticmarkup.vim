@@ -77,17 +77,17 @@ endfunction
 
 function! criticmarkup#JumpNext(editorial)
 	if a:editorial == 1
-		exe "normal ".v:count1."/{[-+\\~]\{2\}<CR>"
+		exe "normal ".v:count1."/{[-+\\~]\\{2\\}\<CR>"
 	else
-		exe "normal ".v:count1."/{[-+\\~\>=]\{2\}<CR>"
+		exe "normal ".v:count1."/{[-+\\~\>=]\\{2\\}\<CR>"
 	endif
 endfunction
 
 function! criticmarkup#JumpPrevious(editorial)
 	if a:editorial == 1
-		exe "normal ".v:count1."?{[-+\\~]\{2\}<CR>"
+		exe "normal ".v:count1."?{[-+\\~]\\{2\\}\<CR>"
 	else
-		exe "normal ".v:count1."?{[-+\\~\>=]\{2\}<CR>"
+		exe "normal ".v:count1."?{[-+\\~\>=]\\{2\\}\<CR>"
 	endif
 endfunction
 
@@ -112,16 +112,16 @@ endfunction
 nmap ]m :call criticmarkup#JumpNext(0)<CR>
 nmap [m :call criticmarkup#JumpPrevious(0)<CR>
 
-nnoremap <leader>ed :set operatorfunc=CMDelOperator<cr>g@
-vnoremap <leader>ed :<c-u>call CMOperator(visualmode(),'<','>','{--','--}')<cr>
-nnoremap <leader>ea :set operatorfunc=CMAddOperator<cr>g@
-vnoremap <leader>ea :<c-u>call CMOperator(visualmode(),'<','>','{++','++}')<cr>
-nnoremap <leader>eh :set operatorfunc=CMHilOperator<cr>g@
-vnoremap <leader>eh :<c-u>call CMOperator(visualmode(),'<','>','{==','==}')<cr>
-nnoremap <leader>ec :set operatorfunc=CMComOperator<cr>g@
-vnoremap <leader>ec :<c-u>call CMOperator(visualmode(),'<','>','{>>','<<}')<cr>
-nnoremap <leader>es :set operatorfunc=CMSubOperator<cr>g@
-vnoremap <leader>es :<c-u>call CMOperator(visualmode(),'<','>','{~~','~>~~}')<cr>
+nnoremap <buffer> <localleader>ed :set operatorfunc=CMDelOperator<cr>g@
+vnoremap <buffer> <localleader>ed :<c-u>call CMOperator(visualmode(),'<','>','{--','--}')<cr>
+nnoremap <buffer> <localleader>ea :set operatorfunc=CMAddOperator<cr>g@
+vnoremap <buffer> <localleader>ea :<c-u>call CMOperator(visualmode(),'<','>','{++','++}')<cr>
+nnoremap <buffer> <localleader>eh :set operatorfunc=CMHilOperator<cr>g@
+vnoremap <buffer> <localleader>eh :<c-u>call CMOperator(visualmode(),'<','>','{==','==}')<cr>
+nnoremap <buffer> <localleader>ec :set operatorfunc=CMComOperator<cr>g@
+vnoremap <buffer> <localleader>ec :<c-u>call CMOperator(visualmode(),'<','>','{>>','<<}')<cr>
+nnoremap <buffer> <localleader>es :set operatorfunc=CMSubOperator<cr>g@
+vnoremap <buffer> <localleader>es :<c-u>call CMOperator(visualmode(),'<','>','{~~','~>~~}')<cr>
 
 function! CMDelOperator(type)
     call CMOperator(a:type,'[',']','{--','--}')
