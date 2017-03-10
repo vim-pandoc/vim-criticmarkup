@@ -77,17 +77,17 @@ endfunction
 
 function! criticmarkup#JumpNext(editorial)
 	if a:editorial == 1
-		exe "normal ".v:count1."/{[-+\\~]\{2}\<CR>"
+		exe "normal ".v:count1."/{[-+\\~]\\{2}\<CR>"
 	else
-		exe "normal ".v:count1."/{[-+\\~\>=]\{2}\<CR>"
+		exe "normal ".v:count1."/{[-+\\~\>=]\\{2}\<CR>"
 	endif
 endfunction
 
 function! criticmarkup#JumpPrevious(editorial)
 	if a:editorial == 1
-		exe "normal ".v:count1."?{[-+\\~]\{2}\<CR>"
+		exe "normal ".v:count1."?{[-+\\~]\\{2}\<CR>"
 	else
-		exe "normal ".v:count1."?{[-+\\~\>=]\{2}\<CR>"
+		exe "normal ".v:count1."?{[-+\\~\>=]\\{2}\<CR>"
 	endif
 endfunction
 
