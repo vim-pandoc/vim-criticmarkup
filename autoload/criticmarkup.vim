@@ -13,16 +13,16 @@ function! criticmarkup#InjectHighlighting()
     syn region criticComment matchgroup=criticMeta start=/{>>/ end=/<<}/ containedin=pandocAtxHeader,pandocBlockQuote,pandocCodeBlock,pandocFootnoteBlock,pandocListItem,pandocUListItem,pandocDefinitionBlock,pandocYAMLHeader,yamlBlock,yamlHeader,yamlPlainScalar,yamlFlowString concealends
     syn region criticHighlight matchgroup=criticHighlighter start=/{==/ end=/==}/ containedin=pandocAtxHeader,pandocBlockQuote,pandocCodeBlock,pandocFootnoteBlock,pandocListItem,pandocUListItem,pandocDefinitionBlock,pandocYAMLHeader,yamlBlock,yamlHeader,yamlPlainScalar,yamlFlowString concealends
 
-    hi criticAdd guibg=#00ff00 guifg=#101010 ctermbg=46 ctermfg=16
-    hi criticDel guibg=#ff0000 guifg=#ffffff ctermbg=196 ctermfg=231
+    hi criticAdd guibg=#00ff00 guifg=#101010 ctermbg=10 ctermfg=0
+    hi criticDel guibg=#ff0000 guifg=#ffffff ctermbg=9 ctermfg=0
     hi link criticAddition criticAdd
     hi link criticDeletion criticDel
     hi link criticSubstitutionAddition criticAddition
     hi link criticSubstitutionDeletion criticDeletion
     hi link criticSubstitutionAdditionMark criticAddition
     hi link criticSubstitutionDeletionMark criticDeletion
-    hi criticMeta guibg=#0099FF guifg=#101010 ctermbg=33 ctermfg=16
-    hi criticHighlighter guibg=#ffff00 guifg=#101010 ctermbg=11 ctermfg=16
+    hi criticMeta guibg=#0099FF guifg=#101010 ctermbg=12 ctermfg=0
+    hi criticHighlighter guibg=#ffff00 guifg=#101010 ctermbg=11 ctermfg=0
     hi link criticComment criticMeta
     hi link criticHighlight criticHighlighter
 endfunction
